@@ -1,5 +1,6 @@
 # Space Invaders
 An adaptation of the Space Invaders game made with Kivy.
+![Screenshot](img_demo.png)
 
 ## Installation
 Make sure the dependencies are installed with `pip`:
