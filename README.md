@@ -6,7 +6,8 @@ Make sure the dependencies are installed with `pip`:
 ```
 pip install -r requirements.txt
 ```
-To run the program, use the command
+## Running the game
+To run the game, use the command
 ```
 python invaders
 ```
