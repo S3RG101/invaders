@@ -1,4 +1,7 @@
 # Space Invaders
+An adaptation of the Space Invaders game made with Kivy.
+
+## Installation
 Make sure the dependencies are installed with `pip`:
 ```
 pip install -r requirements.txt
