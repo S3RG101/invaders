@@ -8,6 +8,10 @@ Make sure the dependencies are installed with `pip`:
 pip install -r requirements.txt
 ```
 ## Running the game
+Locate where the folder is located
+```
+cd ..
+```
 To run the game, use the command
 ```
 python invaders
