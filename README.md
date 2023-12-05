@@ -1,6 +1,6 @@
 # Space Invaders
 ![Screenshot](img_demo.png) <br />
-An adaptation of the Space Invaders arcade game made with python library Kivy.
+An adaptation of the Space Invaders arcade game made in the python library Kivy.
 
 ## Setup
 Open terminal and move to the location where the folder will be installed. Run the following command:
