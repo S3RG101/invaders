@@ -1,5 +1,5 @@
 # Space Invaders
-![Screenshot](img_demo.png)
+![Screenshot](img_demo.png) <br />
 An adaptation of the Space Invaders arcade game made with python library Kivy.
 
 ## Setup
@@ -28,6 +28,6 @@ To change the number of aliens or the speed of the game, use the optional argume
 ```
 python invaders [rows] [columns] [speed]
 ```
-The argument `rows` is an int between 1 and 9
-The argument `columns` is an int between 1 and 15
+The argument `rows` is an int between 1 and 9 <br />
+The argument `columns` is an int between 1 and 15 <br />
 The parameter `speed` is a float between 3 (slowest) and 0 (quickest)
