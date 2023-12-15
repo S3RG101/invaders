@@ -77,17 +77,21 @@ class Ship(GImage):
         Parameter y: The y-coordinate of the center
         Precondition: y is a number (int or float)
 
-        Parameter width: The time in seconds since last update
-        Precondition: dt is a number (int or float)
+        Parameter width: The width of the ship
+        Precondition: width is a number (int or float)
 
-        Parameter height: The time in seconds since last update
-        Precondition: dt is a number (int or float)
+        Parameter height: The height of the ship
+        Precondition: height is a number (int or float)
 
-        Parameter source: The time in seconds since last update
-        Precondition: dt is a number (int or float)
+        Parameter source: The relative path of the of the ship image
+        Precondition: source is a string representing a file path
         """
+        assert isinstance(x, int) or isinstance(x, float)
+        assert isinstance(y, int) or isinstance(y, float)
+        assert isinstance(width, int) or isinstance(width, float)
+        assert isinstance(height, int) or isinstance(height, float)
+        assert isinstance(source, str)
         super().__init__(x=x, y=y, width=width, height=height, source=source)
-
 
     # METHODS TO MOVE THE SHIP AND CHECK FOR COLLISIONS
     def move_right(self):
@@ -98,7 +102,6 @@ class Ship(GImage):
         if self.x <= GAME_WIDTH-SHIP_WIDTH//2:
             self.x += SHIP_MOVEMENT
 
-
     def move_left(self):
         """
         Moves the ship to the left by SHIP_MOVEMENT units unless it is out of
@@ -107,10 +110,9 @@ class Ship(GImage):
         if self.x >= SHIP_WIDTH//2:
             self.x -= SHIP_MOVEMENT
 
-
     def collides(self, bolt):
         """
-        Returns True if the alien bolt collides with the ship
+        Returns True if the alien bolt collides with the ship.
 
         This method returns False if bolt was not fired by the aliens.
 
@@ -125,7 +127,6 @@ class Ship(GImage):
         if (c1 or c2 or c3 or c4) and bolt.getVelocity() == -BOLT_SPEED:
             return True
         return False
-
 
     # COROUTINE METHOD TO ANIMATE THE SHIP
 
@@ -154,25 +155,68 @@ class Alien(GImage):
 
     # GETTERS AND SETTERS (ONLY ADD IF YOU NEED THEM)
     def getX(self):
+        """
+        Returns the X-Coordinate of the alien
+        """
         return self.x
 
     def setX(self, x):
+        """
+        Sets the X-Coordinate of the alien
+
+        Parameter x: The x-coordinate of the center
+        Precondition: x is a number (int or float)
+        """
+        assert isinstance(x, int) or isinstance(x, float)
         self.x = x
 
     def getY(self):
+        """
+        Returns the Y-Coordinate of the alien
+        """
         return self.y
 
     def setY(self, y):
+        """
+        Sets the Y-Coordinate of the alien
+
+        Parameter y: The y-coordinate of the center
+        Precondition: y is a number (int or float)
+        """
+        assert isinstance(y, int) or isinstance(y, float)
         self.y = y
 
     # INITIALIZER TO CREATE AN ALIEN
     def __init__(self, x, y, source, w=ALIEN_WIDTH, h=ALIEN_HEIGHT):
+        """
+        Creates a GImage object.
+
+        Parameter x: The x-coordinate of the center
+        Precondition: x is a number (int or float)
+
+        Parameter y: The y-coordinate of the center
+        Precondition: y is a number (int or float)
+
+        Parameter source: The relative path of the of the alien image
+        Precondition: source is a string representing a file path
+
+        Parameter w: The width of the ship
+        Precondition: w is a number (int or float) (optional)
+
+        Parameter h: The height of the ship
+        Precondition: h is a number (int or float) (optional)
+        """
+        assert isinstance(x, int) or isinstance(x, float)
+        assert isinstance(y, int) or isinstance(y, float)
+        assert isinstance(w, int) or isinstance(w, float)
+        assert isinstance(h, int) or isinstance(h, float)
+        assert isinstance(source, str)
         super().__init__(x=x, y=y, width=w, height=h, source=source)
 
     # METHOD TO CHECK FOR COLLISION (IF DESIRED)
     def collides(self,bolt):
         """
-        Returns True if the player bolt collides with this alien
+        Returns True if the player bolt collides with this alien.
 
         This method returns False if bolt was not fired by the player.
 
@@ -221,16 +265,57 @@ class Bolt(GRectangle):
 
     # GETTERS AND SETTERS (ONLY ADD IF YOU NEED THEM)
     def getHeight(self):
+        """
+        Returns the Y-coordinate of the bolt
+        """
         return self.y
 
     def setHeight(self, y):
+        """
+        Sets the Y-Coordinate of the bolt
+
+        Parameter y: The y-coordinate of the center
+        Precondition: y is a number (int or float)
+        """
+        assert isinstance(y, int) or isinstance(y, float)
         self.y = y
 
     def getVelocity(self):
+        """
+        Returns the velocity of the bolt. The velocity's sign indicates if the
+        bolt is going up or down.
+        """
         return self._velocity
 
     # INITIALIZER TO SET THE VELOCITY
     def __init__(self, x, y, vel, w=BOLT_WIDTH, h=BOLT_HEIGHT, c='white'):
+        """
+        Creates a GRectangle object.
+
+        Parameter x: The x-coordinate of the center
+        Precondition: x is a number (int or float)
+
+        Parameter y: The y-coordinate of the center
+        Precondition: y is a number (int or float)
+
+        Parameter vel: The velocity of the bolt
+        Precondition: vel is a positive or a negative number (int or float)
+
+        Parameter w: The width of the ship
+        Precondition: w (int or float) (optional)
+
+        Parameter h: The height of the ship
+        Precondition: h is a number (int or float) (optional)
+
+        Parameter c: The color of the bolt
+        Precondition: c is a color in string format (optional)
+        """
+        assert isinstance(x, int) or isinstance(x, float)
+        assert isinstance(y, int) or isinstance(y, float)
+        assert isinstance(vel, int) or isinstance(vel, float)
+        assert isinstance(w, int) or isinstance(w, float)
+        assert isinstance(h, int) or isinstance(h, float)
+        assert isinstance(c, str)
         self._velocity = vel
         super().__init__(x=x, y=y, width=w, height=h, fillcolor=c)
 

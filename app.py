@@ -170,27 +170,7 @@ class Invaders(GameApp):
 
         elif self._state == STATE_ACTIVE:
             self._text = None
-            # No aliens left
-            if self._wave.getAliensLeft() == 0:
-                self._state = STATE_COMPLETE
-                self._text = GLabel(text='Mission accomplished', font_size=80,
-                font_name="Arcade.ttf", x=GAME_WIDTH//2, y=GAME_HEIGHT//2,
-                fillcolor='black', linecolor = 'white')
-            # Normal gameplay
-            elif self._wave.getShip() is not None:
-                self._wave.update(self.input, dt)
-            # Game Paused
-            elif self._wave.getLives()>=1:
-                self._state = STATE_PAUSED
-                self._text = GLabel(text='Press S to continue', font_size=80,
-                font_name="Arcade.ttf", x=GAME_WIDTH//2, y=GAME_HEIGHT//2,
-                fillcolor='black', linecolor = 'white')
-            # Lost lives
-            elif self._wave.getLives()<1:
-                self._state = STATE_COMPLETE
-                self._text = GLabel(text='Game Over', font_size=100,
-                font_name="Arcade.ttf", x=GAME_WIDTH//2, y=GAME_HEIGHT//2,
-                fillcolor='black', linecolor = 'white')
+            self.state_active_controller(dt)
 
         elif self._state == STATE_PAUSED and self.input.is_key_pressed('s'):
             self._state = STATE_CONTINUE
@@ -234,3 +214,32 @@ class Invaders(GameApp):
             self._text.draw(self.view)
 
     # HELPER METHODS FOR THE STATES GO HERE
+    def state_active_controller(self, dt):
+        """
+        Procedure to control the winning or losing conditions of the game.
+        Parameter dt: The time in seconds since last update
+        Precondition: dt is a number (int or float)
+        """
+        assert isinstance(dt, int) or isinstance(dt, float)
+
+        # No aliens left
+        if self._wave.getAliensLeft() == 0:
+            self._state = STATE_COMPLETE
+            self._text = GLabel(text='Mission accomplished', font_size=80,
+            font_name="Arcade.ttf", x=GAME_WIDTH//2, y=GAME_HEIGHT//2,
+            fillcolor='black', linecolor = 'white')
+        # Normal gameplay
+        elif self._wave.getShip() is not None:
+            self._wave.update(self.input, dt)
+        # Game Paused
+        elif self._wave.getLives()>=1:
+            self._state = STATE_PAUSED
+            self._text = GLabel(text='Press S to continue', font_size=80,
+            font_name="Arcade.ttf", x=GAME_WIDTH//2, y=GAME_HEIGHT//2,
+            fillcolor='black', linecolor = 'white')
+        # Lost lives
+        elif self._wave.getLives()<1:
+            self._state = STATE_COMPLETE
+            self._text = GLabel(text='Game Over', font_size=100,
+            font_name="Arcade.ttf", x=GAME_WIDTH//2, y=GAME_HEIGHT//2,
+            fillcolor='black', linecolor = 'white')

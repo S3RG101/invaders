@@ -88,7 +88,6 @@ class Wave(object):
     # Attribute _livescont: the counter for how many lives are left
     # Invariant: _livescont: is a GLabel object
 
-
     # GETTERS AND SETTERS (ONLY ADD IF YOU NEED THEM)
     def getAliensLeft(self):
         """
@@ -126,7 +125,6 @@ class Wave(object):
         # Assign parameter
         self._aliens = aliens
 
-
     def setShip(self):
         """
         Procedure to initialize the ship. It creates a Ship object and stores
@@ -140,7 +138,6 @@ class Wave(object):
         Returns the player's ship as a Ship object or None.
         """
         return self._ship
-
 
     def setDline(self):
         """
@@ -156,7 +153,6 @@ class Wave(object):
         Returns the number of lives the player has left.
         """
         return self._lives
-
 
     # INITIALIZER (standard form) TO CREATE SHIP AND ALIENS
     def __init__(self):
@@ -184,6 +180,12 @@ class Wave(object):
         """
         Updates the wave based on the input received, time passed, and winning
         or losing conditions.
+
+        Parameter input: The input controller
+        Precondition: input is an instance of GInput
+
+        Parameter dt: The time in seconds since last update
+        Precondition: dt is a number (int or float)
         """
         assert isinstance(input, GInput)
         assert isinstance(dt, int) or isinstance(dt, float)
@@ -209,7 +211,12 @@ class Wave(object):
     def draw(self, view):
         """
         Displays the wave objects every frame.
+
+        Parameter view: the game view, used in drawing
+        Precondition: view is an instance of GView
         """
+        assert isinstance(view, GView)
+
         # Display score and lives message
         self._livestext.draw(view)
         self._livescont.draw(view)
@@ -226,7 +233,6 @@ class Wave(object):
         # Draw the bolts
         for bolt in self._bolts:
             bolt.draw(view)
-
 
     # HELPER METHODS FOR COLLISION DETECTION
     def move_aliens(self):
@@ -372,12 +378,14 @@ class Wave(object):
 
     def pick_rand_alien(self):
         """
-        Returns a random alien from the wave.
+        Returns a random alien from the wave. Only the bottommost aliens
+        can fire.
         """
         # Convert table into 1d list without None
         aliens = []
-        for row in self._aliens:
-            for alien in row:
-                if alien is not None:
-                    aliens.append(alien)
+        for col in range(len(self._aliens[0])):
+            for row in range(len(self._aliens)):
+                if self._aliens[row][col] is not None:
+                    aliens.append(self._aliens[row][col])
+                    break
         return random.choice(aliens)
